@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Promociones — SuSpa</title>
+  <meta name="description" content="Packs y ofertas especiales en SuSpa. Disfruta de tratamientos premium a precios increíbles. Primera visita con 20% descuento." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══════════════════════════════ -->
+  <nav class="navbar" id="navbar" aria-label="Navegación principal">
+    <a href="index.html" class="navbar-logo">Su<span>Spa</span></a>
+    <ul class="navbar-links" id="navLinks">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="facial.html">Faciales</a></li>
+      <li><a href="corporal.html">Corporales</a></li>
+      <li><a href="cejas-pestanas.html">Cejas & Pestañas</a></li>
+      <li><a href="promociones.html">Promociones</a></li>
+      <li><a href="reserva.html">Reserva</a></li>
+    </ul>
+    <div class="navbar-social">
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram" id="ig-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://wa.me/50000000000" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp" id="wa-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </a>
+      <a href="reserva.html" class="btn-primary" id="cta-nav" style="padding:0.6rem 1.3rem;font-size:0.75rem;">Reservar</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ══ PAGE HERO ═══════════════════════════ -->
+  <section class="page-hero" aria-label="Promociones especiales">
+    <div class="page-hero-bg" style="background-image: url('images/promo-hero.png');"></div>
+    <div class="page-hero-overlay"></div>
+    <a href="index.html" class="breadcrumb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Inicio
+    </a>
+    <div class="page-hero-content">
+      <span class="page-hero-tag">✦ Ofertas Exclusivas</span>
+      <h1 class="page-hero-title">Promociones</h1>
+      <p class="page-hero-desc">Packs diseñados para que vivas la experiencia SuSpa completa ahorrando más. ¡Tiempo limitado!</p>
+    </div>
+  </section>
+
+  <!-- ══ PROMOCIONES GRID ═════════════════════ -->
+  <section style="padding:5rem 4rem;" aria-labelledby="promos-title">
+    <div class="container">
+      <h2 class="section-title reveal" id="promos-title">Nuestras Promociones</h2>
+      <span class="accent-line reveal"></span>
+      <p class="section-subtitle reveal">Elige el pack que más te guste y agenda tu experiencia única</p>
+
+      <div class="promos-grid">
+
+        <!-- Pack 1 -->
+        <div class="promo-card reveal" id="promo-primera-visita">
+          <span class="promo-badge">🌸 Nuevo Cliente</span>
+          <h3>Primera Visita</h3>
+          <p>Si es tu primera vez en SuSpa, te damos la bienvenida con un descuento especial del 20% en cualquier servicio individual de tu elección.</p>
+          <div class="promo-price">
+            <span class="new-price">20% OFF</span>
+          </div>
+          <ul class="promo-includes">
+            <li>Aplica en cualquier servicio individual</li>
+            <li>Incluye asesoría de piel gratuita</li>
+            <li>Válido primera visita únicamente</li>
+            <li>No acumulable con otras ofertas</li>
+          </ul>
+          <a href="reserva.html" class="btn-primary" id="cta-promo-primera" style="font-size:0.82rem;padding:0.8rem 1.8rem;">
+            Reservar ahora →
+          </a>
+        </div>
+
+        <!-- Pack 2 -->
+        <div class="promo-card reveal" id="promo-relajacion">
+          <span class="promo-badge">💆 Más Popular</span>
+          <h3>Pack Relajación Total</h3>
+          <p>La combinación perfecta para liberar el estrés y renovar tu energía. Masaje relajante + facial hidratante en una sesión de bienestar completo.</p>
+          <div class="promo-price">
+            <span class="old-price">$180</span>
+            <span class="new-price">$135</span>
+          </div>
+          <ul class="promo-includes">
+            <li>Masaje Relajante (60 min)</li>
+            <li>Limpieza Facial Profunda (60 min)</li>
+            <li>Copa de vino de cortesía</li>
+            <li>Bata y zapatillas incluidas</li>
+          </ul>
+          <a href="reserva.html" class="btn-primary" id="cta-promo-relajacion" style="font-size:0.82rem;padding:0.8rem 1.8rem;">
+            Reservar ahora →
+          </a>
+        </div>
+
+        <!-- Pack 3 -->
+        <div class="promo-card reveal" id="promo-novia">
+          <span class="promo-badge">💍 Novias</span>
+          <h3>Pack Novia Completo</h3>
+          <p>Para el día más importante de tu vida. Un paquete integral que te dejará radiante de pies a cabeza para tu boda o evento especial.</p>
+          <div class="promo-price">
+            <span class="old-price">$290</span>
+            <span class="new-price">$220</span>
+          </div>
+          <ul class="promo-includes">
+            <li>Diseño y tinte de cejas</li>
+            <li>Extensión de pestañas clásica</li>
+            <li>Limpieza facial + mascarilla iluminadora</li>
+            <li>Exfoliación corporal</li>
+            <li>Sesión pre-boda incluida</li>
+          </ul>
+          <a href="reserva.html" class="btn-primary" id="cta-promo-novia" style="font-size:0.82rem;padding:0.8rem 1.8rem;">
+            Reservar ahora →
+          </a>
+        </div>
+
+        <!-- Pack 4 -->
+        <div class="promo-card reveal" id="promo-corporal">
+          <span class="promo-badge">✨ Premium</span>
+          <h3>Pack Corporal Completo</h3>
+          <p>La experiencia corporal definitiva para quienes quieren modelar, nutrir y rejuvenecer su piel en una sola visita de lujo.</p>
+          <div class="promo-price">
+            <span class="old-price">$240</span>
+            <span class="new-price">$185</span>
+          </div>
+          <ul class="promo-includes">
+            <li>Exfoliación corporal premium</li>
+            <li>Envoltura reductora de arcilla</li>
+            <li>Masaje descontracturante (60 min)</li>
+            <li>Drenaje linfático (30 min)</li>
+            <li>Hidratación corporal con mantequilla de karité</li>
+          </ul>
+          <a href="reserva.html" class="btn-primary" id="cta-promo-corporal" style="font-size:0.82rem;padding:0.8rem 1.8rem;">
+            Reservar ahora →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ AVISO VIGENCIA ═══════════════════════ -->
+  <div style="background:rgba(201,168,76,0.07);border-top:1px solid rgba(201,168,76,0.2);border-bottom:1px solid rgba(201,168,76,0.2);padding:2rem 4rem;text-align:center;">
+    <p style="color:var(--text-muted);font-size:0.88rem;max-width:600px;margin:0 auto;">
+      <strong style="color:var(--accent);">⚠ Importante:</strong> Las promociones están sujetas a disponibilidad y vigencia limitada. Los precios mostrados son referenciales. Contáctanos para confirmar disponibilidad de packs combinados.
+    </p>
+  </div>
+
+  <!-- ══ FOOTER ═══════════════════════════════ -->
+  <footer class="footer" aria-label="Pie de página">
+    <div class="footer-top container">
+      <div class="footer-brand">
+        <span class="navbar-logo">Su<span>Spa</span></span>
+        <p>Tu refugio de belleza y bienestar. Tratamientos premium con productos naturales.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram" id="ig-footer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook" id="fb-footer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://wa.me/50000000000" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp" id="wa-footer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="facial.html">Tratamientos Faciales</a></li>
+          <li><a href="corporal.html">Tratamientos Corporales</a></li>
+          <li><a href="cejas-pestanas.html">Cejas & Pestañas</a></li>
+          <li><a href="promociones.html">Promociones</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>Av. Principal 123, Centro</li>
+          <li>Tel: +5 000-000-0000</li>
+          <li>spa@suspa.com</li>
+          <li>Lun–Vie: 9:00 – 19:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>© 2025 SuSpa. Todos los derechos reservados.</p>
+      <div class="footer-bottom-links">
+        <a href="reserva.html" id="footer-reservar">Reservas</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" id="footer-ig">Instagram</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" id="footer-fb">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
