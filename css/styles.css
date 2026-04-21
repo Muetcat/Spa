@@ -22,7 +22,7 @@
   --transition:    all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* ── Reset ─────────────────────────────────── */
+/* ── Reinicio ─────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -86,7 +86,7 @@ h1, h2, h3, h4 {
   border-radius: 2px;
 }
 
-/* ── Navbar ─────────────────────────────────── */
+/* ── Barra de Navegación ────────────────────── */
 .navbar {
   position: fixed;
   top: 0;
@@ -184,7 +184,7 @@ h1, h2, h3, h4 {
   transform: translateY(-2px);
 }
 
-/* Hamburger */
+/* Menú Hamburguesa */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -204,7 +204,7 @@ h1, h2, h3, h4 {
   border-radius: 2px;
 }
 
-/* ── Hero Section ───────────────────────────── */
+/* ── Sección Principal (Hero) ───────────────── */
 .hero {
   position: relative;
   height: 100vh;
@@ -291,7 +291,7 @@ h1, h2, h3, h4 {
   margin-right: auto;
 }
 
-/* ── Buttons ────────────────────────────────── */
+/* ── Botones ────────────────────────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -351,7 +351,7 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
 }
 
-/* ── Scroll Indicator ──────────────────────── */
+/* ── Indicador de Desplazamiento ────────────── */
 .scroll-indicator {
   position: absolute;
   bottom: 2rem;
@@ -374,7 +374,7 @@ h1, h2, h3, h4 {
   opacity: 0.6;
 }
 
-/* ── Sections ───────────────────────────────── */
+/* ── Secciones ──────────────────────────────── */
 .section {
   padding: 6rem 4rem;
 }
@@ -384,7 +384,7 @@ h1, h2, h3, h4 {
   margin: 0 auto;
 }
 
-/* ── Info Section ───────────────────────────── */
+/* ── Sección de Información ─────────────────── */
 .info-section {
   background: var(--bg-mid);
   padding: 5rem 4rem;
@@ -432,7 +432,7 @@ h1, h2, h3, h4 {
   line-height: 1.6;
 }
 
-/* ── Services Cards Section ─────────────────── */
+/* ── Sección de Tarjetas de Servicios ───────── */
 .services-section {
   padding: 6rem 4rem;
 }
@@ -565,7 +565,7 @@ h1, h2, h3, h4 {
   transform: translateY(0);
 }
 
-/* ── Page Hero (subpáginas) ─────────────────── */
+/* ── Encabezado de Página (subpáginas) ──────── */
 .page-hero {
   position: relative;
   height: 65vh;
@@ -632,7 +632,7 @@ h1, h2, h3, h4 {
   margin: 0 auto;
 }
 
-/* ── Services List (subpáginas) ─────────────── */
+/* ── Lista de Servicios (subpáginas) ────────── */
 .services-list-section {
   padding: 5rem 4rem;
   background: var(--bg-dark);
@@ -702,7 +702,7 @@ h1, h2, h3, h4 {
   letter-spacing: 0.05em;
 }
 
-/* ── Promotions Grid ────────────────────────── */
+/* ── Cuadrícula de Promociones ──────────────── */
 .promos-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -809,7 +809,7 @@ h1, h2, h3, h4 {
   font-size: 0.7rem;
 }
 
-/* ── Booking Form ───────────────────────────── */
+/* ── Formulario de Reserva ──────────────────── */
 .booking-section {
   padding: 5rem 4rem;
 }
@@ -913,7 +913,7 @@ h1, h2, h3, h4 {
   font-size: 0.9rem;
 }
 
-/* Horarios info */
+/* Información de Horarios */
 .horarios-box {
   background: rgba(201,168,76,0.07);
   border: 1px solid rgba(201,168,76,0.2);
@@ -947,7 +947,7 @@ h1, h2, h3, h4 {
   color: var(--accent);
 }
 
-/* ── Footer ─────────────────────────────────── */
+/* ── Pie de Página ──────────────────────────── */
 .footer {
   background: var(--bg-mid);
   border-top: 1px solid var(--border-glass);
@@ -1035,7 +1035,7 @@ h1, h2, h3, h4 {
   color: var(--primary);
 }
 
-/* ── Confirmation Modal ─────────────────────── */
+/* ── Modal de Confirmación ──────────────────── */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1088,7 +1088,7 @@ h1, h2, h3, h4 {
   margin-bottom: 2rem;
 }
 
-/* ── Animations ─────────────────────────────── */
+/* ── Animaciones ────────────────────────────── */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -1110,7 +1110,7 @@ h1, h2, h3, h4 {
   transform: translateY(0);
 }
 
-/* ── Back link ──────────────────────────────── */
+/* ── Enlace de Regreso ──────────────────────── */
 .breadcrumb {
   position: absolute;
   top: 50%;
@@ -1129,7 +1129,7 @@ h1, h2, h3, h4 {
 
 .breadcrumb:hover { color: var(--primary); }
 
-/* ── Responsive ─────────────────────────────── */
+/* ── Diseño Responsivo ──────────────────────── */
 @media (max-width: 900px) {
   .navbar { padding: 1rem 2rem; }
   .navbar.scrolled { padding: 0.7rem 2rem; }

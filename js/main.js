@@ -6,7 +6,7 @@ if (navbar) {
   });
 }
 
-/* ── Hamburger menu ────────────────────────── */
+/* ── Menú hamburguesa ────────────────────────── */
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('navLinks');
 
@@ -14,7 +14,7 @@ if (hamburger && navLinks) {
   hamburger.addEventListener('click', () => {
     const isOpen = navLinks.classList.toggle('mobile-open');
     hamburger.setAttribute('aria-expanded', isOpen);
-    // animate bars
+    // animar barras
     const bars = hamburger.querySelectorAll('span');
     if (isOpen) {
       bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
@@ -25,7 +25,7 @@ if (hamburger && navLinks) {
     }
   });
 
-  // Close menu on link click
+  // Cerrar menú al hacer clic en un enlace
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('mobile-open');
@@ -35,7 +35,7 @@ if (hamburger && navLinks) {
   });
 }
 
-/* ── Scroll reveal ─────────────────────────── */
+/* ── Animación al desplazar (Scroll reveal) ─────────────────────────── */
 const revealEls = document.querySelectorAll('.reveal');
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
@@ -50,7 +50,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 revealEls.forEach(el => revealObserver.observe(el));
 
-/* ── Dynamic booking select (service categories) ─ */
+/* ── Selector dinámico de reservas (categorías) ─ */
 const categorySelect = document.getElementById('categoria');
 const serviceSelect  = document.getElementById('servicio');
 
@@ -103,7 +103,7 @@ if (categorySelect) {
   });
 }
 
-/* ── Set min date for booking ──────────────── */
+/* ── Configurar fecha mínima para reservas ──────────────── */
 const dateInput = document.getElementById('fecha');
 if (dateInput) {
   const today = new Date();
@@ -114,7 +114,7 @@ if (dateInput) {
   dateInput.max = `${yyyy + 1}-${mm}-${dd}`;
 }
 
-/* ── Form submission + modal ───────────────── */
+/* ── Envío de formulario + modal ───────────────── */
 const bookingForm   = document.getElementById('bookingForm');
 const modalOverlay  = document.getElementById('modalOverlay');
 const modalClose    = document.getElementById('modalClose');
@@ -123,7 +123,7 @@ if (bookingForm) {
   bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // Simple validation feedback
+    // Simple validación visual
     const inputs = bookingForm.querySelectorAll('[required]');
     let valid = true;
     inputs.forEach(inp => {
@@ -136,7 +136,7 @@ if (bookingForm) {
 
     if (!valid) return;
 
-    // Show confirmation modal
+    // Mostrar modal de confirmación
     if (modalOverlay) {
       modalOverlay.classList.add('active');
       bookingForm.reset();
@@ -156,7 +156,7 @@ if (modalOverlay) {
   });
 }
 
-/* ── Add mobile nav styles dynamically ─────── */
+/* ── Agregar estilos de menú móvil dinámicamente ─────── */
 const style = document.createElement('style');
 style.textContent = `
   #navLinks.mobile-open {
