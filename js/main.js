@@ -1,8 +1,4 @@
-// =============================================
-//  SuSpa — Main JavaScript
-// =============================================
 
-/* ── Navbar scroll effect ──────────────────── */
 const navbar = document.getElementById('navbar');
 if (navbar) {
   window.addEventListener('scroll', () => {
