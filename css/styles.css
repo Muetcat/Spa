@@ -93,7 +93,7 @@ h1, h2, h3, h4 {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1.2rem 1.5rem;
+  padding: 1.2rem 4rem 1.2rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -105,7 +105,7 @@ h1, h2, h3, h4 {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-glass);
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 4rem 0.8rem 1.5rem;
 }
 
 .navbar-logo {
