@@ -93,7 +93,7 @@ h1, h2, h3, h4 {
 .navbar {
   position: fixed;
   top: 0;
-  left: -3;
+  left: -15;
   right: 0;
   z-index: 1000;
   padding: 1.2rem 4rem;
