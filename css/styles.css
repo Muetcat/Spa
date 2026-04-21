@@ -55,7 +55,6 @@ a {
   color: inherit;
 }
 
-/* ── Typography ────────────────────────────── */
 h1, h2, h3, h4 {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 600;
@@ -97,7 +96,7 @@ h1, h2, h3, h4 {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1.2rem 4rem;
+  padding: 1rem 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
