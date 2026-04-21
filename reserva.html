@@ -54,7 +54,7 @@
       Inicio
     </a>
     <div class="page-hero-content">
-      <span class="page-hero-tag">✦ Agenda tu visita</span>
+      <span class="page-hero-tag"><span class="tag-icono" aria-hidden="true"></span> Agenda tu visita</span>
       <h1 class="page-hero-title">Reserva tu Cita</h1>
       <p class="page-hero-desc">Completa el formulario y nos pondremos en contacto para confirmar tu reserva en menos de 24 horas.</p>
     </div>
@@ -115,10 +115,10 @@
               <label for="categoria">Categoría de servicio *</label>
               <select id="categoria" name="categoria" required>
                 <option value="">— Selecciona una categoría —</option>
-                <option value="facial">🌸 Tratamientos Faciales</option>
-                <option value="corporal">💆 Tratamientos Corporales</option>
-                <option value="cejas">👁️ Cejas & Pestañas</option>
-                <option value="promo">🎁 Packs & Promociones</option>
+                <option value="facial">Tratamientos Faciales</option>
+                <option value="corporal">Tratamientos Corporales</option>
+                <option value="cejas">Cejas &amp; Pestañas</option>
+                <option value="promo">Packs &amp; Promociones</option>
               </select>
             </div>
 
@@ -201,7 +201,10 @@
         <!-- Información de horarios -->
         <div class="horarios-box" role="complementary" aria-label="Información de horarios">
           <div>
-            <h4>📅 Horarios de Atención</h4>
+          <div class="grupo-icono">
+            <span class="icono icono-calendario" aria-hidden="true"></span>
+            <h4>Horarios de Atención</h4>
+          </div>
             <ul>
               <li>Lunes a Viernes: 9:00 – 19:00</li>
               <li>Sábados: 9:00 – 17:00</li>
@@ -209,12 +212,17 @@
             </ul>
           </div>
           <div>
-            <h4>📌 Información importante</h4>
+          <div class="grupo-icono">
+            <span class="icono icono-info" aria-hidden="true"></span>
+            <h4>Información importante</h4>
+          </div>
             <p>
-              ✦ Se requiere confirmación 24h antes<br>
-              ✦ Cancela con mínimo 4h de anticipación<br>
-              ✦ Primera visita con 20% de descuento<br>
-              ✦ Aceptamos todas las formas de pago
+              <ul class="lista-info">
+                <li>Se requiere confirmación 24h antes</li>
+                <li>Cancela con mínimo 4h de anticipación</li>
+                <li>Primera visita con 20% de descuento</li>
+                <li>Aceptamos todas las formas de pago</li>
+              </ul>
             </p>
           </div>
         </div>
@@ -289,7 +297,7 @@
 
   <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-box">
-      <div class="modal-icon">🌸</div>
+      <div class="modal-icon"><span class="icono icono-confirmacion" aria-hidden="true"></span></div>
       <h3 id="modal-title">¡Reserva enviada!</h3>
       <p>Gracias por elegir SusyEstetic. Recibirás una confirmación en las próximas 24 horas con todos los detalles de tu cita.</p>
       <button class="btn-primary" id="modalClose" style="justify-content:center;width:100%;">
