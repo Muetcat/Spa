@@ -27,15 +27,15 @@
       <a href="https://wa.me/+593968951312" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp" id="wa-nav">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
       </a>
-      <a href="reserva.html" class="btn-primary" id="cta-nav" style="padding:0.6rem 1.3rem;font-size:0.75rem;">Reservar</a>
+      <a href="reserva.html" class="btn-primary btn-nav-reservar" id="cta-nav">Reservar</a>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
   <section class="page-hero" aria-label="Tratamientos Faciales">
-    <div class="page-hero-bg" style="background-image: url('images/facial-hero.jpg');"></div>
+    <div class="page-hero-bg hero-facial"></div>
     <div class="page-hero-overlay"></div>
     <a href="index.html" class="breadcrumb">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
@@ -62,7 +62,11 @@
             <h3>Limpieza Facial Profunda</h3>
             <p>Eliminamos impurezas, puntos negros y células muertas mediante una limpieza profunda con vapor y extracción profesional. Ideal para pieles grasas o mixtas. Incluye tónico, sérum y crema hidratante.</p>
           </div>
-          <span class="service-item-badge">60 min</span>
+          <div class="service-item-actions">
+            <span class="service-item-price">$35</span>
+            <span class="service-item-badge">60 min</span>
+            <button type="button" class="add-to-cart-btn" data-id="facial-1" data-name="Limpieza Facial Profunda" data-price="35" data-duration="60 min" data-category="Facial">+ Agregar</button>
+          </div>
         </div>
 
         <div class="service-item reveal" id="s-hidratacion">
@@ -71,7 +75,11 @@
             <h3>Hidratación Facial Intensiva</h3>
             <p>Tratamiento de nutrición profunda con ácido hialurónico y vitamina C. Restaura la luminosidad y elasticidad de la piel. Perfecto para pieles secas o deshidratadas. Resultados visibles desde la primera sesión.</p>
           </div>
-          <span class="service-item-badge">50 min</span>
+          <div class="service-item-actions">
+            <span class="service-item-price">$45</span>
+            <span class="service-item-badge">50 min</span>
+            <button type="button" class="add-to-cart-btn" data-id="facial-2" data-name="Hidratación Facial Intensiva" data-price="45" data-duration="50 min" data-category="Facial">+ Agregar</button>
+          </div>
         </div>
 
         <div class="service-item reveal" id="s-antiedad">
@@ -80,7 +88,11 @@
             <h3>Tratamiento Anti-Edad</h3>
             <p>Combina microdermoabrasión, sérum de retinol y mascarilla tensor para reducir líneas de expresión y manchas. Estimula la producción de colágeno y devuelve la firmeza a la piel madura.</p>
           </div>
-          <span class="service-item-badge">75 min</span>
+          <div class="service-item-actions">
+            <span class="service-item-price">$65</span>
+            <span class="service-item-badge">75 min</span>
+            <button type="button" class="add-to-cart-btn" data-id="facial-3" data-name="Tratamiento Anti-Edad" data-price="65" data-duration="75 min" data-category="Facial">+ Agregar</button>
+          </div>
         </div>
 
         <div class="service-item reveal" id="s-peeling">
@@ -89,7 +101,11 @@
             <h3>Peeling Químico</h3>
             <p>Exfoliación química controlada con ácidos frutales (AHA/BHA) que renueva la superficie de la piel, mejora la textura, unifica el tono y trata manchas y cicatrices de acné. Incluye post-tratamiento calmante.</p>
           </div>
-          <span class="service-item-badge">45 min</span>
+          <div class="service-item-actions">
+            <span class="service-item-price">$50</span>
+            <span class="service-item-badge">45 min</span>
+            <button type="button" class="add-to-cart-btn" data-id="facial-4" data-name="Peeling Químico" data-price="50" data-duration="45 min" data-category="Facial">+ Agregar</button>
+          </div>
         </div>
 
         <div class="service-item reveal" id="s-mascarilla">
@@ -98,7 +114,11 @@
             <h3>Mascarilla Iluminadora Gold</h3>
             <p>Lujosa mascarilla con extracto de oro coloidal, vitamina E y perla marina. Aporta un resplandor inmediato y sensación de terciopelo en la piel. Ideal como tratamiento previo a un evento especial.</p>
           </div>
-          <span class="service-item-badge">40 min</span>
+          <div class="service-item-actions">
+            <span class="service-item-price">$40</span>
+            <span class="service-item-badge">40 min</span>
+            <button type="button" class="add-to-cart-btn" data-id="facial-5" data-name="Mascarilla Iluminadora Gold" data-price="40" data-duration="40 min" data-category="Facial">+ Agregar</button>
+          </div>
         </div>
 
         <div class="service-item reveal" id="s-acne">
@@ -107,16 +127,20 @@
             <h3>Tratamiento para Acné</h3>
             <p>Protocolo especializado con luz LED azul, ácido salicílico y mascarilla con árbol de té para controlar el acné activo, reducir la inflamación y prevenir nuevos brotes. Apto para pieles sensibles y adolescentes.</p>
           </div>
-          <span class="service-item-badge">55 min</span>
+          <div class="service-item-actions">
+            <span class="service-item-price">$45</span>
+            <span class="service-item-badge">55 min</span>
+            <button type="button" class="add-to-cart-btn" data-id="facial-6" data-name="Tratamiento para Acné" data-price="45" data-duration="55 min" data-category="Facial">+ Agregar</button>
+          </div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <section style="background: linear-gradient(135deg, rgba(200,164,165,0.12), rgba(201,168,76,0.08)); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); padding: 4rem; text-align:center;" aria-labelledby="cta-facial">
-    <h2 class="section-title reveal" id="cta-facial" style="margin-bottom:1rem;">¿Te animas a probar?</h2>
-    <p class="section-subtitle reveal" style="margin-bottom:2rem;">Reserva tu tratamiento facial hoy y disfruta de una experiencia única</p>
+  <section class="cta-band" aria-labelledby="cta-facial">
+    <h2 class="section-title reveal" id="cta-facial">¿Te animas a probar?</h2>
+    <p class="section-subtitle reveal">Reserva tu tratamiento facial hoy y disfruta de una experiencia única</p>
     <a href="reserva.html" class="btn-primary reveal" id="cta-facial-reservar">
       Reservar tratamiento facial
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -153,7 +177,7 @@
       <div class="footer-col">
         <h4>Contacto</h4>
         <ul>
-          <li>Av. Principal 123, Centro</li>
+          <li>Bolivar y Cesar Abel Pazmiño</li>
           <li>Tel: +593 098-497-0418</li>
           <li>spa@suspa.com</li>
           <li>Lun–Vie: 9:00 – 19:00</li>
@@ -171,5 +195,7 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js?v=2"></script>
 </body>
 </html>

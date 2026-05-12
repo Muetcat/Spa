@@ -57,23 +57,25 @@ const serviceSelect  = document.getElementById('servicio');
 const servicesData = {
   facial: [
     'Limpieza Facial Profunda',
-    'Hidratación Facial',
+    'Hidratación Facial Intensiva',
     'Tratamiento Anti-Edad',
     'Peeling Químico',
-    'Mascarilla Iluminadora',
+    'Mascarilla Iluminadora Gold',
+    'Tratamiento para Acné',
   ],
   corporal: [
     'Masaje Relajante',
     'Masaje Descontracturante',
-    'Exfoliación Corporal',
+    'Masaje con Piedras Calientes',
+    'Exfoliación Corporal Premium',
     'Envoltura Reductora',
-    'Drenaje Linfático',
+    'Drenaje Linfático Manual',
   ],
   cejas: [
     'Diseño de Cejas',
     'Laminado de Cejas',
     'Extensión de Pestañas Clásica',
-    'Extensión Volumen',
+    'Extensión de Pestañas Volumen',
     'Lifting de Pestañas',
     'Tinte de Cejas y Pestañas',
   ],
@@ -81,7 +83,7 @@ const servicesData = {
     'Pack Relajación Total',
     'Pack Novia Completo',
     'Pack Corporal Completo',
-    'Primera Visita (20% dto.)',
+    'Primera Visita',
   ],
 };
 
@@ -106,12 +108,13 @@ if (categorySelect) {
 /* ── Configurar fecha mínima para reservas ──────────────── */
 const dateInput = document.getElementById('fecha');
 if (dateInput) {
-  const today = new Date();
-  const yyyy  = today.getFullYear();
-  const mm    = String(today.getMonth() + 1).padStart(2, '0');
-  const dd    = String(today.getDate() + 1).padStart(2, '0');
-  dateInput.min = `${yyyy}-${mm}-${dd}`;
-  dateInput.max = `${yyyy + 1}-${mm}-${dd}`;
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  dateInput.min = tomorrow.toISOString().split('T')[0];
+
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() + 1);
+  dateInput.max = maxDate.toISOString().split('T')[0];
 }
 
 /* ── Envío de formulario + modal ───────────────── */
@@ -120,10 +123,20 @@ const modalOverlay  = document.getElementById('modalOverlay');
 const modalClose    = document.getElementById('modalClose');
 
 if (bookingForm) {
-  bookingForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  // Crear elemento de error para el formulario de reserva
+  let bookingError = document.getElementById('booking-error');
+  if (!bookingError) {
+    bookingError = document.createElement('p');
+    bookingError.id = 'booking-error';
+    bookingError.style.cssText = 'color:#e07575;font-size:0.9rem;margin-top:1rem;display:none;text-align:center;';
+    bookingForm.querySelector('.form-submit').after(bookingError);
+  }
 
-    // Simple validación visual
+  bookingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    bookingError.style.display = 'none';
+
+    // Validación visual de campos requeridos
     const inputs = bookingForm.querySelectorAll('[required]');
     let valid = true;
     inputs.forEach(inp => {
@@ -133,13 +146,55 @@ if (bookingForm) {
         setTimeout(() => inp.style.borderColor = '', 2500);
       }
     });
-
     if (!valid) return;
 
-    // Mostrar modal de confirmación
-    if (modalOverlay) {
-      modalOverlay.classList.add('active');
-      bookingForm.reset();
+    const btn = document.getElementById('btn-enviar');
+    const prevHTML = btn.innerHTML;
+    btn.innerHTML = 'Enviando…';
+    btn.disabled = true;
+
+    // Construir payload manualmente para asegurar los nombres de campo correctos
+    const payload = {
+      nombre:    document.getElementById('nombre').value.trim(),
+      telefono:  document.getElementById('telefono').value.trim(),
+      email:     document.getElementById('email').value.trim(),
+      categoria: document.getElementById('categoria').value,
+      servicio:  document.getElementById('servicio').value,
+      fecha:     document.getElementById('fecha').value,
+      horario:   document.getElementById('horario').value,
+      notas:     document.getElementById('notas').value.trim(),
+    };
+
+    try {
+      const response = await fetch('api/reserva.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      let result;
+      try { result = await response.json(); }
+      catch { result = { ok: false, message: 'Respuesta inesperada del servidor.' }; }
+
+      btn.innerHTML = prevHTML;
+      btn.disabled = false;
+
+      if (!result.ok) {
+        bookingError.textContent = result.message || 'Ocurrió un error. Inténtalo de nuevo.';
+        bookingError.style.display = 'block';
+        return;
+      }
+
+      // Éxito: mostrar modal de confirmación
+      if (modalOverlay) {
+        modalOverlay.classList.add('active');
+        bookingForm.reset();
+      }
+    } catch (err) {
+      btn.innerHTML = prevHTML;
+      btn.disabled = false;
+      bookingError.textContent = 'Error de conexión. Asegúrate de estar en el servidor (localhost).';
+      bookingError.style.display = 'block';
     }
   });
 }

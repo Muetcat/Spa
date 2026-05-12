@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS clientes (
   nombre_completo VARCHAR(150)   NOT NULL COMMENT 'Nombre y apellido de la clienta',
   telefono        VARCHAR(20)    NOT NULL COMMENT 'Número de contacto con código de país',
   correo          VARCHAR(150)             COMMENT 'Correo electrónico de contacto',
+  password        VARCHAR(255)             COMMENT 'Contraseña encriptada',
   notas_perfil    TEXT                     COMMENT 'Alergias, preferencias o condiciones especiales',
   es_primera_visita TINYINT(1)  NOT NULL DEFAULT 1 COMMENT '1 = primera vez, 0 = clienta recurrente',
   fecha_registro  TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,

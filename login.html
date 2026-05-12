@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ingresar — SuSpa</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="auth-page">
+
+    <!-- ── Panel izquierdo ─────────────────────── -->
+    <div class="auth-left">
+      <div class="auth-left-content">
+        <a href="index.html" class="auth-left-logo">Su<span>Spa</span></a>
+        <h2>Bienvenida a tu refugio de belleza</h2>
+        <p>Inicia sesión para guardar tus servicios favoritos, ver el historial de reservas y acceder a ofertas exclusivas.</p>
+        <div class="auth-left-divider"></div>
+        <div class="auth-left-stats">
+          <div><strong>+500</strong><span>Clientas</span></div>
+          <div><strong>8+</strong><span>Años</span></div>
+          <div><strong>20+</strong><span>Tratamientos</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Panel derecho ───────────────────────── -->
+    <div class="auth-right">
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin"    onclick="switchTab('login')">Iniciar sesión</button>
+        <button class="auth-tab"        id="tabRegister" onclick="switchTab('register')">Registrarse</button>
+      </div>
+
+      <!-- Formulario Login -->
+      <div class="auth-form-panel active" id="panelLogin">
+        <h3>Bienvenida de vuelta</h3>
+        <p class="auth-desc">Ingresa tus datos para continuar</p>
+
+        <div class="auth-error"  id="loginError"></div>
+        <div class="auth-success" id="loginSuccess"></div>
+
+        <form class="auth-form" id="loginForm" novalidate>
+
+          <div class="form-group">
+            <label for="loginEmail">Correo electrónico *</label>
+            <input type="email" id="loginEmail" name="email"
+                   placeholder="maria@correo.com"
+                   autocomplete="email" required />
+            <span class="field-error" id="err-loginEmail"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Contraseña *</label>
+            <div class="password-wrap">
+              <input type="password" id="loginPassword" name="password"
+                     placeholder="Tu contraseña"
+                     autocomplete="current-password" required />
+              <button type="button" class="pwd-toggle" onclick="togglePwd('loginPassword', this)" aria-label="Ver contraseña">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+            <span class="field-error" id="err-loginPassword"></span>
+          </div>
+
+          <div class="form-submit" style="margin-top:0.5rem;">
+            <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+              Iniciar sesión
+            </button>
+          </div>
+        </form>
+
+        <p style="text-align:center;margin-top:1.2rem;font-size:0.85rem;color:var(--text-muted);">
+          ¿No tienes cuenta?
+          <button onclick="switchTab('register')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:0.85rem;font-weight:700;">Regístrate aquí</button>
+        </p>
+      </div>
+
+      <!-- Formulario Registro -->
+      <div class="auth-form-panel" id="panelRegister">
+        <h3>Crear cuenta</h3>
+        <p class="auth-desc">Únete a la comunidad SuSpa</p>
+
+        <div class="auth-error"   id="registerError"></div>
+        <div class="auth-success" id="registerSuccess"></div>
+
+        <form class="auth-form" id="registerForm" novalidate>
+
+          <div class="form-group">
+            <label for="regName">Nombre completo *</label>
+            <input type="text" id="regName" name="name"
+                   placeholder="María García"
+                   autocomplete="name" required />
+            <span class="field-error" id="err-regName"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail">Correo electrónico *</label>
+            <input type="email" id="regEmail" name="email"
+                   placeholder="maria@correo.com"
+                   autocomplete="email" required />
+            <span class="field-error" id="err-regEmail"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="regPhone">Teléfono *</label>
+            <input type="tel" id="regPhone" name="phone"
+                   placeholder="+593 098-497-0418"
+                   autocomplete="tel" required />
+            <span class="field-error" id="err-regPhone"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="regPassword">Contraseña *</label>
+            <div class="password-wrap">
+              <input type="password" id="regPassword" name="password"
+                     placeholder="Mínimo 8 caracteres"
+                     autocomplete="new-password" required />
+              <button type="button" class="pwd-toggle" onclick="togglePwd('regPassword', this)" aria-label="Ver contraseña">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+            <span class="field-error" id="err-regPassword"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="regConfirm">Confirmar contraseña *</label>
+            <div class="password-wrap">
+              <input type="password" id="regConfirm" name="confirm"
+                     placeholder="Repite tu contraseña"
+                     autocomplete="new-password" required />
+              <button type="button" class="pwd-toggle" onclick="togglePwd('regConfirm', this)" aria-label="Ver contraseña">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+            <span class="field-error" id="err-regConfirm"></span>
+          </div>
+
+          <div class="form-submit" style="margin-top:0.5rem;">
+            <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+              Crear cuenta
+            </button>
+          </div>
+        </form>
+
+        <p style="text-align:center;margin-top:1.2rem;font-size:0.85rem;color:var(--text-muted);">
+          ¿Ya tienes cuenta?
+          <button onclick="switchTab('login')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:0.85rem;font-weight:700;">Inicia sesión</button>
+        </p>
+      </div>
+
+      <a href="index.html" class="auth-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+        Volver al inicio
+      </a>
+
+    </div>
+  </div>
+
+  <script>
+    /* ── Autenticación con Backend ───────────── */
+    fetch('api/check_session.php')
+      .then(res => res.json())
+      .then(data => {
+        if (data.logged_in) window.location.href = 'index.html';
+      })
+      .catch(console.error);
+
+    /* ── Tabs ────────────────────────────────── */
+    function switchTab(tab) {
+      document.getElementById('panelLogin').classList.toggle('active', tab === 'login');
+      document.getElementById('panelRegister').classList.toggle('active', tab === 'register');
+      document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+      document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+      clearErrors();
+    }
+
+    function clearErrors() {
+      document.querySelectorAll('.field-error').forEach(el => el.textContent = '');
+      document.querySelectorAll('.auth-error, .auth-success').forEach(el => {
+        el.style.display = 'none'; el.textContent = '';
+      });
+      document.querySelectorAll('.form-group input').forEach(inp => inp.style.borderColor = '');
+    }
+
+    /* ── Mostrar/ocultar contraseña ────────────── */
+    function togglePwd(inputId, btn) {
+      const inp = document.getElementById(inputId);
+      const isText = inp.type === 'text';
+      inp.type = isText ? 'password' : 'text';
+      btn.style.opacity = isText ? '1' : '0.5';
+    }
+
+    /* ── Validaciones ──────────────────────────── */
+    function setError(fieldId, msg) {
+      const el = document.getElementById('err-' + fieldId);
+      if (el) el.textContent = msg;
+      const inp = document.getElementById(fieldId);
+      if (inp) inp.style.borderColor = '#e07575';
+    }
+
+    function clearError(fieldId) {
+      const el = document.getElementById('err-' + fieldId);
+      if (el) el.textContent = '';
+      const inp = document.getElementById(fieldId);
+      if (inp) inp.style.borderColor = '';
+    }
+
+    function isValidEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+    }
+
+    function validateLogin() {
+      let ok = true;
+      const email = document.getElementById('loginEmail').value;
+      const pwd   = document.getElementById('loginPassword').value;
+      clearErrors();
+
+      if (!email.trim())         { setError('loginEmail', 'El correo es obligatorio.'); ok = false; }
+      else if (!isValidEmail(email)) { setError('loginEmail', 'Ingresa un correo válido.'); ok = false; }
+      if (!pwd)                  { setError('loginPassword', 'La contraseña es obligatoria.'); ok = false; }
+      return ok;
+    }
+
+    function validateRegister() {
+      let ok = true;
+      const name    = document.getElementById('regName').value;
+      const email   = document.getElementById('regEmail').value;
+      const phone   = document.getElementById('regPhone').value;
+      const pwd     = document.getElementById('regPassword').value;
+      const confirm = document.getElementById('regConfirm').value;
+      clearErrors();
+
+      if (!name.trim())           { setError('regName', 'El nombre es obligatorio.'); ok = false; }
+      if (!email.trim())          { setError('regEmail', 'El correo es obligatorio.'); ok = false; }
+      else if (!isValidEmail(email)) { setError('regEmail', 'Ingresa un correo válido.'); ok = false; }
+      if (!phone.trim())          { setError('regPhone', 'El teléfono es obligatorio.'); ok = false; }
+      if (pwd.length < 8)         { setError('regPassword', 'La contraseña debe tener al menos 8 caracteres.'); ok = false; }
+      else if (!/[a-zA-Z]/.test(pwd) || !/\d/.test(pwd)) {
+        setError('regPassword', 'Debe incluir letras y números.'); ok = false;
+      }
+      if (pwd !== confirm)        { setError('regConfirm', 'Las contraseñas no coinciden.'); ok = false; }
+      return ok;
+    }
+
+    /* ── Login ───────────────────────────────── */
+    document.getElementById('loginForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!validateLogin()) return;
+
+      const email = document.getElementById('loginEmail').value.trim();
+      const pwd   = document.getElementById('loginPassword').value;
+
+      const errEl = document.getElementById('loginError');
+      const sucEl = document.getElementById('loginSuccess');
+      errEl.style.display = 'none';
+
+      try {
+        const btn = e.target.querySelector('button[type="submit"]');
+        const prevText = btn.textContent;
+        btn.textContent = 'Iniciando sesión...';
+        btn.disabled = true;
+
+        const response = await fetch('api/auth.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'login', email: email, password: pwd })
+        });
+        
+        const data = await response.json();
+        btn.textContent = prevText;
+        btn.disabled = false;
+
+        if (!data.ok) {
+          errEl.textContent = data.message || 'Error al iniciar sesión.';
+          errEl.style.display = 'block';
+          return;
+        }
+
+        sucEl.textContent = data.message + ' Redirigiendo…';
+        sucEl.style.display = 'block';
+        setTimeout(() => {
+          const back = new URLSearchParams(location.search).get('from') || 'index.html';
+          window.location.href = back;
+        }, 1200);
+
+      } catch (err) {
+        errEl.textContent = 'Error de conexión con el servidor.';
+        errEl.style.display = 'block';
+      }
+    });
+
+    /* ── Registro ────────────────────────────── */
+    document.getElementById('registerForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!validateRegister()) return;
+
+      const name    = document.getElementById('regName').value.trim();
+      const email   = document.getElementById('regEmail').value.trim();
+      const phone   = document.getElementById('regPhone').value.trim();
+      const pwd     = document.getElementById('regPassword').value;
+
+      const errEl = document.getElementById('registerError');
+      const sucEl = document.getElementById('registerSuccess');
+      errEl.style.display = 'none';
+
+      try {
+        const btn = e.target.querySelector('button[type="submit"]');
+        const prevText = btn.textContent;
+        btn.textContent = 'Creando cuenta...';
+        btn.disabled = true;
+
+        const response = await fetch('api/auth.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'register', name: name, email: email, phone: phone, password: pwd })
+        });
+        
+        const data = await response.json();
+        btn.textContent = prevText;
+        btn.disabled = false;
+
+        if (!data.ok) {
+          errEl.textContent = data.message || 'Error al crear la cuenta.';
+          errEl.style.display = 'block';
+          return;
+        }
+
+        sucEl.textContent = data.message + ' Redirigiendo…';
+        sucEl.style.display = 'block';
+        setTimeout(() => { window.location.href = 'index.html'; }, 1400);
+
+      } catch (err) {
+        errEl.textContent = 'Error de conexión con el servidor.';
+        errEl.style.display = 'block';
+      }
+    });
+
+    /* ── Validación en tiempo real ───────────── */
+    document.getElementById('regPassword').addEventListener('input', function() {
+      const v = this.value;
+      if (v.length === 0) { clearError('regPassword'); return; }
+      if (v.length < 8 || !/[a-zA-Z]/.test(v) || !/\d/.test(v)) {
+        setError('regPassword', 'Mínimo 8 caracteres con letras y números.');
+      } else { clearError('regPassword'); }
+    });
+
+    document.getElementById('regConfirm').addEventListener('input', function() {
+      const pwd = document.getElementById('regPassword').value;
+      if (this.value && this.value !== pwd) {
+        setError('regConfirm', 'Las contraseñas no coinciden.');
+      } else { clearError('regConfirm'); }
+    });
+
+    document.getElementById('loginEmail').addEventListener('input', function() {
+      if (this.value && !isValidEmail(this.value)) {
+        setError('loginEmail', 'Formato de correo inválido.');
+      } else { clearError('loginEmail'); }
+    });
+  </script>
+</body>
+</html>

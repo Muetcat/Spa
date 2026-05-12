@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Perfil — SuSpa</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .profile-section {
+      padding: 6rem 1.5rem;
+      min-height: 70vh;
+    }
+    .profile-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 768px) {
+      .profile-container {
+        grid-template-columns: 300px 1fr;
+      }
+    }
+    .profile-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(12px);
+    }
+    .profile-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 2.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+    }
+    .profile-name {
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .profile-email {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .profile-info-group {
+      margin-bottom: 1.5rem;
+    }
+    .profile-info-group label {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+    .profile-info-group p {
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    .reservations-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .reservations-table th, .reservations-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-glass);
+    }
+    .reservations-table th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .reservations-table tr:hover {
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status-pendiente { background: rgba(201, 168, 76, 0.15); color: var(--accent); }
+    .status-confirmada { background: rgba(46, 204, 113, 0.15); color: #2ecc71; }
+    .status-completada { background: rgba(52, 152, 219, 0.15); color: #3498db; }
+    .status-cancelada { background: rgba(231, 76, 60, 0.15); color: #e74c3c; }
+
+    .no-reservations {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ BARRA DE NAVEGACIÓN ══════════════════════════════ -->
+  <nav class="navbar" id="navbar" aria-label="Navegación principal">
+    <a href="index.html" class="navbar-logo">Su<span>Spa</span></a>
+    <ul class="navbar-links" id="navLinks">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="facial.html">Faciales</a></li>
+      <li><a href="corporal.html">Corporales</a></li>
+      <li><a href="cejas-pestanas.html">Cejas & Pestañas</a></li>
+      <li><a href="promociones.html">Promociones</a></li>
+      <li><a href="reserva.html">Reserva</a></li>
+    </ul>
+    <div class="navbar-social">
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="profile-section">
+    <div class="profile-container" id="profileContent" style="display:none;">
+      
+      <!-- Lado Izquierdo: Datos del usuario -->
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar" id="avatarLetter"></div>
+          <h2 class="profile-name" id="userName">Cargando...</h2>
+          <p class="profile-email" id="userEmail">Cargando...</p>
+        </div>
+        <hr style="border-color:var(--border-glass); margin: 2rem 0;">
+        <div class="profile-info-group">
+          <label>Teléfono</label>
+          <p id="userPhone">...</p>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <button id="perfilLogoutBtn" class="btn-outline" style="width: 100%; justify-content: center;">Cerrar Sesión</button>
+        </div>
+      </div>
+
+      <!-- Lado Derecho: Reservas -->
+      <div class="profile-card">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--accent); margin-bottom:1rem;">Mis Reservas</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:2rem;">Aquí puedes ver el historial de tus citas programadas.</p>
+        
+        <div style="overflow-x: auto;">
+          <table class="reservations-table" id="reservationsTable">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Servicio / Promo</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="reservationsBody">
+              <!-- Las reservas se cargarán aquí -->
+            </tbody>
+          </table>
+        </div>
+        <div id="noReservations" class="no-reservations" style="display:none;">
+          <p>Aún no tienes reservas registradas.</p>
+          <a href="reserva.html" class="btn-primary" style="margin-top: 1rem; display: inline-flex;">Reservar ahora</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ PIE DE PÁGINA ═══════════════════════════════ -->
+  <footer class="footer" aria-label="Pie de página">
+    <div class="footer-top container">
+      <div class="footer-brand">
+        <span class="navbar-logo">Su<span>Spa</span></span>
+        <p>Tu refugio de belleza y bienestar. Tratamientos premium con productos naturales.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="facial.html">Tratamientos Faciales</a></li>
+          <li><a href="corporal.html">Tratamientos Corporales</a></li>
+          <li><a href="cejas-pestanas.html">Cejas & Pestañas</a></li>
+          <li><a href="promociones.html">Promociones</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>© 2026 SuSpa. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js?v=2"></script>
+  <script>
+    document.getElementById('perfilLogoutBtn').addEventListener('click', async () => {
+      try {
+        await fetch('api/logout.php', { method: 'POST' });
+        window.location.href = 'index.html';
+      } catch (err) {
+        console.error(err);
+      }
+    });
+
+    async function loadProfile() {
+      try {
+        const res = await fetch('api/get_profile.php', { cache: 'no-store' });
+        if (res.status === 401) {
+          window.location.href = 'login.html';
+          return;
+        }
+        
+        const data = await res.json();
+        
+        if (!data.ok) {
+          alert(data.message || 'Error al cargar el perfil');
+          window.location.href = 'login.html';
+          return;
+        }
+
+        // Llenar datos del cliente
+        const cli = data.cliente;
+        document.getElementById('avatarLetter').textContent = cli.nombre.charAt(0).toUpperCase();
+        document.getElementById('userName').textContent = cli.nombre;
+        document.getElementById('userEmail').textContent = cli.correo;
+        document.getElementById('userPhone').textContent = cli.telefono || 'No especificado';
+
+        // Llenar reservas
+        const tbody = document.getElementById('reservationsBody');
+        const table = document.getElementById('reservationsTable');
+        const noRes = document.getElementById('noReservations');
+
+        if (data.reservas && data.reservas.length > 0) {
+          tbody.innerHTML = '';
+          data.reservas.forEach(r => {
+            const tr = document.createElement('tr');
+            
+            // Formatear estado
+            const estadoClase = r.estado ? r.estado.toLowerCase() : 'pendiente';
+            const estadoTexto = r.estado ? r.estado.charAt(0).toUpperCase() + r.estado.slice(1) : 'Pendiente';
+            
+            // Nombre del servicio o promoción
+            const itemNombre = r.servicio_nombre || r.promo_nombre || 'Servicio no especificado';
+
+            // Formatear fecha a formato local
+            const fechaObj = new Date(r.fecha_cita);
+            // Aseguramos que muestre el día correcto agregando el offset
+            fechaObj.setMinutes(fechaObj.getMinutes() + fechaObj.getTimezoneOffset());
+            const fechaFormateada = fechaObj.toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' });
+
+            // Formatear hora (quitar segundos si existen)
+            const horaStr = r.hora_inicio ? r.hora_inicio.substring(0, 5) : '--:--';
+
+            tr.innerHTML = `
+              <td>${fechaFormateada}</td>
+              <td>${horaStr}</td>
+              <td>${itemNombre}</td>
+              <td><span class="status-badge status-${estadoClase}">${estadoTexto}</span></td>
+            `;
+            tbody.appendChild(tr);
+          });
+          table.style.display = 'table';
+          noRes.style.display = 'none';
+        } else {
+          table.style.display = 'none';
+          noRes.style.display = 'block';
+        }
+
+        // Mostrar contenido
+        document.getElementById('profileContent').style.display = 'grid';
+
+      } catch (err) {
+        console.error('Error fetching profile:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProfile);
+  </script>
+</body>
+</html>
