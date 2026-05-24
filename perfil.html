@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Perfil de usuario en SusyEstetic." />
   <title>Mi Perfil — SuSpa</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=3" />
   <style>
     .profile-section {
       padding: 6rem 1.5rem;
@@ -104,6 +105,18 @@
     .status-completada { background: rgba(52, 152, 219, 0.15); color: #3498db; }
     .status-cancelada { background: rgba(231, 76, 60, 0.15); color: #e74c3c; }
 
+    .pago-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .pago-pagado { background: rgba(46, 204, 113, 0.15); color: #2ecc71; }
+    .pago-pendiente { background: rgba(201, 168, 76, 0.15); color: var(--accent); }
+
+
     .no-reservations {
       text-align: center;
       padding: 3rem 1rem;
@@ -164,6 +177,7 @@
                 <th>Hora</th>
                 <th>Servicio / Promo</th>
                 <th>Estado</th>
+                <th>Pago</th>
               </tr>
             </thead>
             <tbody id="reservationsBody">
@@ -202,8 +216,9 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/auth.js?v=2"></script>
+  <script defer src="js/cart.js?v=5"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/auth.js?v=5"></script>
   <script>
     document.getElementById('perfilLogoutBtn').addEventListener('click', async () => {
       try {
@@ -263,11 +278,17 @@
             // Formatear hora (quitar segundos si existen)
             const horaStr = r.hora_inicio ? r.hora_inicio.substring(0, 5) : '--:--';
 
+            // Formatear Pago
+            const metodoPago = r.metodo_pago === 'paypal' ? 'PayPal' : 'Local';
+            const estadoPago = r.estado_pago === 'pagado' ? 'Pagado' : 'Pendiente';
+            const pagoClase = r.estado_pago === 'pagado' ? 'pagado' : 'pendiente';
+
             tr.innerHTML = `
               <td>${fechaFormateada}</td>
               <td>${horaStr}</td>
               <td>${itemNombre}</td>
               <td><span class="status-badge status-${estadoClase}">${estadoTexto}</span></td>
+              <td><span class="pago-badge pago-${pagoClase}">${metodoPago} (${estadoPago})</span></td>
             `;
             tbody.appendChild(tr);
           });
@@ -288,5 +309,7 @@
 
     document.addEventListener('DOMContentLoaded', loadProfile);
   </script>
+
+  <script src="//instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
 </body>
 </html>

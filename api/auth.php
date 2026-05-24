@@ -60,10 +60,10 @@ if ($action === 'register') {
         $stmt->execute([$name, $email, $phone, $hashed]);
         $userId = (int) $pdo->lastInsertId();
 
-        // Iniciar sesión PHP
         $_SESSION['user_id']   = $userId;
         $_SESSION['user_name'] = $name;
         $_SESSION['user_email'] = $email;
+        $_SESSION['user_phone'] = $phone;
 
         echo json_encode([
             'ok'      => true,
@@ -88,7 +88,7 @@ if ($action === 'register') {
     }
 
     $stmt = $pdo->prepare(
-        'SELECT id_cliente, nombre_completo, correo, password FROM clientes WHERE correo = ? LIMIT 1'
+        'SELECT id_cliente, nombre_completo, correo, telefono, password, es_admin FROM clientes WHERE correo = ? LIMIT 1'
     );
     $stmt->execute([$email]);
     $user = $stmt->fetch();
@@ -104,13 +104,16 @@ if ($action === 'register') {
     $_SESSION['user_id']    = (int) $user['id_cliente'];
     $_SESSION['user_name']  = $user['nombre_completo'];
     $_SESSION['user_email'] = $user['correo'];
+    $_SESSION['user_phone'] = $user['telefono'];
+    $_SESSION['is_admin']   = (bool) ($user['es_admin'] ?? 0);
 
     echo json_encode([
         'ok'      => true,
         'message' => '¡Inicio de sesión exitoso!',
         'user'    => [
-            'id'   => (int) $user['id_cliente'],
-            'name' => $user['nombre_completo']
+            'id'       => (int) $user['id_cliente'],
+            'name'     => $user['nombre_completo'],
+            'is_admin' => (bool) ($user['es_admin'] ?? 0)
         ]
     ]);
 

@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tratamientos Faciales — SusyEstetic</title>
   <meta name="description"
-    content="Descubre nuestros tratamientos faciales premium: limpieza profunda, hidratación, anti-edad, peeling y más. SuSpa." />
-  <link rel="stylesheet" href="css/styles.css" />
+    content="Tratamientos faciales profesionales en SusyEstetic. Limpieza profunda, hidratación y anti-edad para una piel radiante." />
+  <link rel="stylesheet" href="css/styles.css?v=3" />
 </head>
 
 <body>
@@ -69,100 +69,9 @@
       <span class="accent-line reveal"></span>
       <p class="section-subtitle reveal">Cada tratamiento es personalizado para las necesidades únicas de tu piel</p>
 
-      <div class="services-list">
-
-        <div class="service-item reveal" id="s-limpieza">
-          <span class="service-item-num">01</span>
-          <div class="service-item-info">
-            <h3>Limpieza Facial Profunda</h3>
-            <p>Eliminamos impurezas, puntos negros y células muertas mediante una limpieza profunda con vapor y
-              extracción profesional. Ideal para pieles grasas o mixtas. Incluye tónico, sérum y crema hidratante.</p>
-          </div>
-          <div class="service-item-actions">
-            <span class="service-item-price">$35</span>
-            <span class="service-item-badge">60 min</span>
-            <button type="button" class="add-to-cart-btn" data-id="facial-1" data-name="Limpieza Facial Profunda"
-              data-price="35" data-duration="60 min" data-category="Facial">+ Agregar</button>
-          </div>
-        </div>
-
-        <div class="service-item reveal" id="s-hidratacion">
-          <span class="service-item-num">02</span>
-          <div class="service-item-info">
-            <h3>Hidratación Facial Intensiva</h3>
-            <p>Tratamiento de nutrición profunda con ácido hialurónico y vitamina C. Restaura la luminosidad y
-              elasticidad de la piel. Perfecto para pieles secas o deshidratadas. Resultados visibles desde la primera
-              sesión.</p>
-          </div>
-          <div class="service-item-actions">
-            <span class="service-item-price">$45</span>
-            <span class="service-item-badge">50 min</span>
-            <button type="button" class="add-to-cart-btn" data-id="facial-2" data-name="Hidratación Facial Intensiva"
-              data-price="45" data-duration="50 min" data-category="Facial">+ Agregar</button>
-          </div>
-        </div>
-
-        <div class="service-item reveal" id="s-antiedad">
-          <span class="service-item-num">03</span>
-          <div class="service-item-info">
-            <h3>Tratamiento Anti-Edad</h3>
-            <p>Combina microdermoabrasión, sérum de retinol y mascarilla tensor para reducir líneas de expresión y
-              manchas. Estimula la producción de colágeno y devuelve la firmeza a la piel madura.</p>
-          </div>
-          <div class="service-item-actions">
-            <span class="service-item-price">$65</span>
-            <span class="service-item-badge">75 min</span>
-            <button type="button" class="add-to-cart-btn" data-id="facial-3" data-name="Tratamiento Anti-Edad"
-              data-price="65" data-duration="75 min" data-category="Facial">+ Agregar</button>
-          </div>
-        </div>
-
-        <div class="service-item reveal" id="s-peeling">
-          <span class="service-item-num">04</span>
-          <div class="service-item-info">
-            <h3>Peeling Químico</h3>
-            <p>Exfoliación química controlada con ácidos frutales (AHA/BHA) que renueva la superficie de la piel, mejora
-              la textura, unifica el tono y trata manchas y cicatrices de acné. Incluye post-tratamiento calmante.</p>
-          </div>
-          <div class="service-item-actions">
-            <span class="service-item-price">$50</span>
-            <span class="service-item-badge">45 min</span>
-            <button type="button" class="add-to-cart-btn" data-id="facial-4" data-name="Peeling Químico" data-price="50"
-              data-duration="45 min" data-category="Facial">+ Agregar</button>
-          </div>
-        </div>
-
-        <div class="service-item reveal" id="s-mascarilla">
-          <span class="service-item-num">05</span>
-          <div class="service-item-info">
-            <h3>Mascarilla Iluminadora Gold</h3>
-            <p>Lujosa mascarilla con extracto de oro coloidal, vitamina E y perla marina. Aporta un resplandor inmediato
-              y sensación de terciopelo en la piel. Ideal como tratamiento previo a un evento especial.</p>
-          </div>
-          <div class="service-item-actions">
-            <span class="service-item-price">$40</span>
-            <span class="service-item-badge">40 min</span>
-            <button type="button" class="add-to-cart-btn" data-id="facial-5" data-name="Mascarilla Iluminadora Gold"
-              data-price="40" data-duration="40 min" data-category="Facial">+ Agregar</button>
-          </div>
-        </div>
-
-        <div class="service-item reveal" id="s-acne">
-          <span class="service-item-num">06</span>
-          <div class="service-item-info">
-            <h3>Tratamiento para Acné</h3>
-            <p>Protocolo especializado con luz LED azul, ácido salicílico y mascarilla con árbol de té para controlar el
-              acné activo, reducir la inflamación y prevenir nuevos brotes. Apto para pieles sensibles y adolescentes.
-            </p>
-          </div>
-          <div class="service-item-actions">
-            <span class="service-item-price">$45</span>
-            <span class="service-item-badge">55 min</span>
-            <button type="button" class="add-to-cart-btn" data-id="facial-6" data-name="Tratamiento para Acné"
-              data-price="45" data-duration="55 min" data-category="Facial">+ Agregar</button>
-          </div>
-        </div>
-
+      <div class="services-list" id="dynamic-services-list" data-category="facial">
+        <!-- Los servicios se cargarán dinámicamente desde js/public_services.js -->
+        <p class="admin-empty">Cargando servicios...</p>
       </div>
     </div>
   </section>
@@ -237,9 +146,12 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/auth.js?v=2"></script>
+  <script defer src="js/cart.js?v=5"></script>
+  <script defer src="js/public_services.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/auth.js?v=5"></script>
+
+  <script src="//instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
 </body>
 
 </html>

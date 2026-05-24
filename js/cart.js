@@ -1,13 +1,46 @@
 
-/* ── SuSpa — Carrito de Compras ─────────────────────────── */
-const CART_KEY = 'suspa_cart';
+/* ── SuSpa — Carrito de Compras (por usuario) ──────────────── */
+
+/* Clave dinámica: suspa_cart_<userId> | suspa_cart_guest */
+let _cartUserId = null;
+
+function getCartKey() {
+  return _cartUserId ? 'suspa_cart_' + _cartUserId : 'suspa_cart_guest';
+}
+
+/**
+ * Cambia el usuario activo del carrito.
+ * Se llama desde auth.js al verificar sesión.
+ * @param {number|string|null} userId  — ID del usuario o null para invitado
+ */
+function setCartUser(userId) {
+  const oldKey = getCartKey();
+  _cartUserId = userId || null;
+  const newKey = getCartKey();
+
+  /* Si cambiamos de invitado a un usuario logueado,
+     mover los ítems del carrito invitado al del usuario (merge) */
+  if (oldKey !== newKey) {
+    const guestCart = JSON.parse(localStorage.getItem(oldKey) || '[]');
+    const userCart  = JSON.parse(localStorage.getItem(newKey) || '[]');
+
+    if (guestCart.length > 0 && userId) {
+      /* Reemplazar el carrito del usuario con el carrito de invitado actual
+         para evitar que aparezcan ítems antiguos de sesiones pasadas */
+      localStorage.setItem(newKey, JSON.stringify(guestCart));
+      localStorage.removeItem(oldKey); // limpiar carrito invitado
+    }
+  }
+
+  updateCartUI();
+}
 
 function getCart() {
-  return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+  return JSON.parse(localStorage.getItem(getCartKey()) || '[]');
 }
 
 function saveCart(cart) {
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  localStorage.setItem(getCartKey(), JSON.stringify(cart));
   updateCartUI();
 }
 
@@ -49,6 +82,16 @@ function closeCart() {
   document.getElementById('cartOverlay').classList.remove('open');
 }
 
+function handleReservationClick(e) {
+  e.preventDefault();
+  closeCart();
+  if (!_cartUserId) {
+    window.location.href = 'login.html?from=reserva.html';
+  } else {
+    window.location.href = 'reserva.html';
+  }
+}
+
 function showToast(msg) {
   let toast = document.getElementById('cartToast');
   if (!toast) {
@@ -74,6 +117,11 @@ function updateCartUI() {
   }
 
   renderCartItems(cart);
+
+  /* Si estamos en la página de reserva, actualizar resumen */
+  if (typeof renderCartSummary === 'function') {
+    renderCartSummary();
+  }
 }
 
 function renderCartItems(cart) {
@@ -126,7 +174,7 @@ function renderCartItems(cart) {
       <span>Total estimado</span>
       <strong>${total > 0 ? '$' + total.toFixed(2) : ''}${hasUnprice ? ' + consultar' : ''}</strong>
     </div>
-    <a href="reserva.html" class="btn-primary" style="justify-content:center;width:100%;margin-top:1rem;" onclick="closeCart()">
+    <a href="#" class="btn-primary" style="justify-content:center;width:100%;margin-top:1rem;" onclick="handleReservationClick(event)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
         <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
       </svg>

@@ -14,21 +14,45 @@ if (!$input) {
     exit;
 }
 
-// Recoger campos
+// Recoger campos comunes
 $nombre          = trim($input['nombre']   ?? '');
 $telefono        = trim($input['telefono'] ?? '');
 $email           = strtolower(trim($input['email']    ?? ''));
-$categoria       = trim($input['categoria'] ?? '');
-$servicio_nombre = trim($input['servicio']  ?? '');
 $fecha           = trim($input['fecha']     ?? '');
 $horario_inicio  = trim($input['horario']   ?? '');
 $notas           = trim($input['notas']     ?? '');
 
-// Validar obligatorios
-if (!$nombre || !$telefono || !$email || !$servicio_nombre || !$fecha || !$horario_inicio) {
+// Campos de pago
+$metodo_pago       = strtolower(trim($input['metodo_pago'] ?? 'local'));
+$estado_pago       = strtolower(trim($input['estado_pago'] ?? 'pendiente'));
+$paypal_order_id   = isset($input['paypal_order_id']) ? trim($input['paypal_order_id']) : null;
+$paypal_capture_id = isset($input['paypal_capture_id']) ? trim($input['paypal_capture_id']) : null;
+$monto_pagado      = floatval($input['monto_pagado'] ?? 0.00);
+
+// Validar obligatorios comunes
+if (!$nombre || !$telefono || !$email || !$fecha || !$horario_inicio) {
     http_response_code(400);
     echo json_encode(['ok' => false, 'message' => 'Faltan campos obligatorios.']);
     exit;
+}
+
+/* Determinar modo: carrito (servicios[]) o manual (categoria + servicio) */
+$servicios_arr = $input['servicios'] ?? null;
+$is_cart_mode  = is_array($servicios_arr) && count($servicios_arr) > 0;
+
+if (!$is_cart_mode) {
+    // Modo manual: necesitamos servicio individual
+    $servicio_nombre = trim($input['servicio'] ?? '');
+    $categoria       = trim($input['categoria'] ?? '');
+    if (!$servicio_nombre) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'message' => 'Debes seleccionar al menos un servicio.']);
+        exit;
+    }
+    // Convertir a formato de array para unificar el flujo
+    $servicios_arr = [
+        ['nombre' => $servicio_nombre, 'categoria' => $categoria, 'qty' => 1]
+    ];
 }
 
 // Validar fecha no pasada
@@ -66,43 +90,8 @@ try {
         }
     }
 
-    /* ── 2. Resolver servicio o promoción ──────────── */
-    $id_servicio  = null;
-    $id_promocion = null;
-
-    if ($categoria === 'promo') {
-        // Buscar por nombre exacto en promociones
-        $stmt = $pdo->prepare('SELECT id_promocion FROM promociones WHERE nombre = ? LIMIT 1');
-        $stmt->execute([$servicio_nombre]);
-        $row = $stmt->fetch();
-        if ($row) {
-            $id_promocion = (int) $row['id_promocion'];
-        }
-    } else {
-        // Buscar por nombre en servicios (búsqueda parcial como fallback)
-        $stmt = $pdo->prepare('SELECT id_servicio FROM servicios WHERE nombre = ? LIMIT 1');
-        $stmt->execute([$servicio_nombre]);
-        $row = $stmt->fetch();
-        if (!$row) {
-            // Fallback: buscar con LIKE en caso de que el nombre venga levemente diferente
-            $stmt = $pdo->prepare('SELECT id_servicio FROM servicios WHERE nombre LIKE ? LIMIT 1');
-            $stmt->execute(['%' . $servicio_nombre . '%']);
-            $row = $stmt->fetch();
-        }
-        if ($row) {
-            $id_servicio = (int) $row['id_servicio'];
-        }
-    }
-
-    if (!$id_servicio && !$id_promocion) {
-        throw new Exception('El servicio seleccionado no existe en la base de datos: "' . $servicio_nombre . '"');
-    }
-
-    /* ── 3. Resolver horario ───────────────────────── */
-    // El frontend envía "09:00", "10:30", etc.
-    // MySQL TIME puede ser "09:00:00" → igualamos agregando ":00"
+    /* ── 2. Resolver horario ───────────────────────── */
     $hora_buscar = $horario_inicio;
-    // Si ya tiene segundos (HH:MM:SS) dejarlo, si no agregar :00
     if (preg_match('/^\d{1,2}:\d{2}$/', $hora_buscar)) {
         $hora_buscar = $hora_buscar . ':00';
     }
@@ -116,24 +105,90 @@ try {
     }
     $id_horario = (int) $row['id_horario'];
 
-    /* ── 4. Insertar reserva ───────────────────────── */
-    $stmt = $pdo->prepare(
-        'INSERT INTO reservas 
-            (id_cliente, id_servicio, id_promocion, id_horario, fecha_cita, notas_reserva) 
-         VALUES (?, ?, ?, ?, ?, ?)'
-    );
-    $stmt->execute([
-        $cliente_id,
-        $id_servicio,     // NULL si es promo
-        $id_promocion,    // NULL si es servicio
-        $id_horario,
-        $fecha,
-        $notas
-    ]);
+    /* ── 3. Crear una reserva por cada servicio del carrito ── */
+    $reservas_creadas = 0;
+
+    foreach ($servicios_arr as $srv) {
+        $srv_nombre   = trim($srv['nombre']    ?? '');
+        $srv_categoria = trim($srv['categoria'] ?? '');
+        $srv_qty      = max(1, (int) ($srv['qty'] ?? 1));
+
+        if (!$srv_nombre) continue;
+
+        $id_servicio  = null;
+        $id_promocion = null;
+
+        // Detectar si es promoción por la categoría
+        $es_promo = (stripos($srv_categoria, 'promo') !== false)
+                 || (stripos($srv_categoria, 'Pack')  !== false);
+
+        if ($es_promo) {
+            $stmt = $pdo->prepare('SELECT id_promocion FROM promociones WHERE nombre = ? LIMIT 1');
+            $stmt->execute([$srv_nombre]);
+            $row = $stmt->fetch();
+            if ($row) {
+                $id_promocion = (int) $row['id_promocion'];
+            }
+        }
+
+        if (!$id_promocion) {
+            // Buscar en servicios por nombre exacto
+            $stmt = $pdo->prepare('SELECT id_servicio FROM servicios WHERE nombre = ? LIMIT 1');
+            $stmt->execute([$srv_nombre]);
+            $row = $stmt->fetch();
+            if (!$row) {
+                // Fallback: LIKE
+                $stmt = $pdo->prepare('SELECT id_servicio FROM servicios WHERE nombre LIKE ? LIMIT 1');
+                $stmt->execute(['%' . $srv_nombre . '%']);
+                $row = $stmt->fetch();
+            }
+            if ($row) {
+                $id_servicio = (int) $row['id_servicio'];
+            }
+        }
+
+        if (!$id_servicio && !$id_promocion) {
+            throw new Exception('El servicio "' . $srv_nombre . '" no existe en la base de datos.');
+        }
+
+        $estado_reserva = ($metodo_pago === 'paypal' && $estado_pago === 'pagado') ? 'confirmada' : 'pendiente';
+
+        // Crear N reservas según la cantidad
+        for ($q = 0; $q < $srv_qty; $q++) {
+            $stmt = $pdo->prepare(
+                'INSERT INTO reservas 
+                    (id_cliente, id_servicio, id_promocion, id_horario, fecha_cita, notas_reserva, estado, metodo_pago, estado_pago, paypal_order_id, paypal_capture_id, monto_pagado) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            );
+            $stmt->execute([
+                $cliente_id,
+                $id_servicio,
+                $id_promocion,
+                $id_horario,
+                $fecha,
+                $notas,
+                $estado_reserva,
+                $metodo_pago,
+                $estado_pago,
+                $paypal_order_id,
+                $paypal_capture_id,
+                $monto_pagado
+            ]);
+            $reservas_creadas++;
+        }
+    }
+
+    if ($reservas_creadas === 0) {
+        throw new Exception('No se pudo crear ninguna reserva. Verifica los servicios seleccionados.');
+    }
 
     $pdo->commit();
 
-    echo json_encode(['ok' => true, 'message' => '¡Reserva creada con éxito! Te contactaremos pronto.']);
+    $msg = $reservas_creadas === 1
+        ? '¡Reserva creada con éxito! Te contactaremos pronto.'
+        : "¡$reservas_creadas reservas creadas con éxito! Te contactaremos pronto.";
+
+    echo json_encode(['ok' => true, 'message' => $msg]);
 
 } catch (Exception $e) {
     if ($pdo->inTransaction()) {

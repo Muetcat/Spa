@@ -33,7 +33,10 @@ try {
             r.fecha_cita, 
             h.hora_inicio,
             s.nombre AS servicio_nombre,
-            p.nombre AS promo_nombre
+            p.nombre AS promo_nombre,
+            r.metodo_pago,
+            r.estado_pago,
+            r.estado
         FROM reservas r
         LEFT JOIN horarios_disponibles h ON r.id_horario = h.id_horario
         LEFT JOIN servicios s ON r.id_servicio = s.id_servicio
