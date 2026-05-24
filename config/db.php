@@ -10,7 +10,7 @@ define('DB_PASS',    '');
 define('DB_CHARSET', 'utf8mb4');
 
 // Configuración de PayPal
-define('PAYPAL_CLIENT_ID', 'test'); // Sandbox client ID por defecto
+define('PAYPAL_CLIENT_ID', 'AQ4otnSsYWwpKv3QmCMqBygv3ET-lqWoIbD56PNZv6cYRvdl6PNycGem3pgT9Zz_jFSdEMpnjovvoJvC');
 define('PAYPAL_CURRENCY',  'USD');  // Moneda para transacciones
 
 
