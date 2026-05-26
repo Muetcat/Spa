@@ -622,3 +622,25 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
+/* ── Cargar estadísticas reales desde la base de datos ── */
+document.addEventListener('DOMContentLoaded', async () => {
+  const statClientes = document.getElementById('stat-clientes');
+  const statAnios = document.getElementById('stat-anios');
+  const statServicios = document.getElementById('stat-servicios');
+
+  if (statClientes || statAnios || statServicios) {
+    try {
+      const res = await fetch('api/public_stats.php');
+      const data = await res.json();
+      if (data.ok) {
+        if (statClientes) statClientes.textContent = `+${data.clientes}`;
+        if (statAnios) statAnios.textContent = `${data.anios}`;
+        if (statServicios) statServicios.textContent = `${data.servicios}+`;
+      }
+    } catch (err) {
+      console.error('Error al cargar estadísticas:', err);
+    }
+  }
+});
+
