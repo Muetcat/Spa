@@ -289,7 +289,6 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: space-between;
   transition: var(--transition);
-  width: 100vw;
 }
 
 .navbar.scrolled {
@@ -1434,6 +1433,7 @@ h1, h2, h3, h4 {
   .navbar.scrolled { padding: 0.7rem 2rem; }
   .navbar-links { display: none; }
   .hamburger { display: flex; }
+  .navbar-social .social-icon { display: none; }
 
   .hero-title { font-size: clamp(2.5rem, 10vw, 5rem); }
 
@@ -1441,6 +1441,9 @@ h1, h2, h3, h4 {
   .services-section,
   .services-list-section,
   .booking-section { padding: 4rem 2rem; }
+
+  .booking-wrapper { padding: 2rem; }
+  .checkout-verification-card { padding: 1.5rem; }
 
   .info-section { padding: 4rem 2rem; }
 
@@ -1466,6 +1469,9 @@ h1, h2, h3, h4 {
 @media (max-width: 500px) {
   .hero-cta { flex-direction: column; align-items: center; }
   .navbar-logo { font-size: 1.6rem; }
+  .booking-wrapper { padding: 1.2rem 1rem; }
+  .checkout-verification-card { padding: 1rem; }
+  .detail-row { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
 }
 
 /* ═══════════════════════════════════════════════════════════
