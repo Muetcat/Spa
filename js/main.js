@@ -624,7 +624,7 @@ style.textContent = `
 document.head.appendChild(style);
 
 /* ── Cargar estadísticas reales desde la base de datos ── */
-document.addEventListener('DOMContentLoaded', async () => {
+async function loadStats() {
   const statClientes = document.getElementById('stat-clientes');
   const statAnios = document.getElementById('stat-anios');
   const statServicios = document.getElementById('stat-servicios');
@@ -642,5 +642,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       console.error('Error al cargar estadísticas:', err);
     }
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadStats);
+} else {
+  loadStats();
+}
 
