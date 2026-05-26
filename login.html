@@ -18,9 +18,9 @@
         <p>Inicia sesión para guardar tus servicios favoritos, ver el historial de reservas y acceder a ofertas exclusivas.</p>
         <div class="auth-left-divider"></div>
         <div class="auth-left-stats">
-          <div><strong>+500</strong><span>Clientas</span></div>
-          <div><strong>8+</strong><span>Años</span></div>
-          <div><strong>20+</strong><span>Tratamientos</span></div>
+          <div><strong id="stat-clientes">+500</strong><span>Clientas</span></div>
+          <div><strong id="stat-anios">8</strong><span>Años</span></div>
+          <div><strong id="stat-servicios">20+</strong><span>Tratamientos</span></div>
         </div>
       </div>
     </div>
@@ -167,6 +167,21 @@
   </div>
 
   <script>
+    /* ── Cargar estadísticas reales desde la base de datos ── */
+    fetch('api/public_stats.php')
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          const statClientes = document.getElementById('stat-clientes');
+          const statAnios = document.getElementById('stat-anios');
+          const statServicios = document.getElementById('stat-servicios');
+          if (statClientes) statClientes.textContent = `+${data.clientes}`;
+          if (statAnios) statAnios.textContent = `${data.anios}`;
+          if (statServicios) statServicios.textContent = `${data.servicios}+`;
+        }
+      })
+      .catch(console.error);
+
     /* ── Autenticación con Backend ───────────── */
     fetch('api/check_session.php')
       .then(res => res.json())
