@@ -419,7 +419,7 @@ INSERT INTO configuracion_negocio (clave, valor, descripcion) VALUES
   ('eslogan',              'Donde la belleza encuentra la calma', 'Eslogan principal'),
   ('direccion',            'Bolivar y Cesar Abel Pazmiño, San Miguel de Bolivar, Ecuador', 'Dirección física del local'),
   ('telefono',             '+593 098-497-0418',               'Teléfono principal de contacto'),
-  ('whatsapp',             '+593968951312',                   'Número de WhatsApp para contacto directo'),
+  ('whatsapp',             '+593981540690',                   'Número de WhatsApp para contacto directo'),
   ('correo',               'spa@suspa.com',                   'Correo electrónico de contacto'),
   ('instagram_url',        'https://instagram.com',           'URL del perfil de Instagram'),
   ('facebook_url',         'https://facebook.com',            'URL del perfil de Facebook'),
