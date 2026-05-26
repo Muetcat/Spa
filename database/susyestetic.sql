@@ -255,27 +255,27 @@ INSERT INTO servicios
 VALUES
   (1, 'Limpieza Facial Profunda',
    'Eliminamos impurezas, puntos negros y células muertas mediante una limpieza profunda con vapor y extracción profesional. Ideal para pieles grasas o mixtas. Incluye tónico, sérum y crema hidratante.',
-   60, NULL, 1, 1, 1),
+   60, 15.00, 1, 1, 1),
 
   (1, 'Hidratación Facial Intensiva',
    'Tratamiento de nutrición profunda con ácido hialurónico y vitamina C. Restaura la luminosidad y elasticidad de la piel. Perfecto para pieles secas o deshidratadas. Resultados visibles desde la primera sesión.',
-   50, NULL, 1, 0, 2),
+   50, 18.00, 1, 0, 2),
 
   (1, 'Tratamiento Anti-Edad',
    'Combina microdermoabrasión, sérum de retinol y mascarilla tensor para reducir líneas de expresión y manchas. Estimula la producción de colágeno y devuelve la firmeza a la piel madura.',
-   75, NULL, 1, 0, 3),
+   75, 20.00, 1, 0, 3),
 
   (1, 'Peeling Químico',
    'Exfoliación química controlada con ácidos frutales (AHA/BHA) que renueva la superficie de la piel, mejora la textura, unifica el tono y trata manchas y cicatrices de acné. Incluye post-tratamiento calmante.',
-   45, NULL, 1, 0, 4),
+   45, 19.00, 1, 0, 4),
 
   (1, 'Mascarilla Iluminadora Gold',
    'Lujosa mascarilla con extracto de oro coloidal, vitamina E y perla marina. Aporta un resplandor inmediato y sensación de terciopelo en la piel. Ideal como tratamiento previo a un evento especial.',
-   40, NULL, 1, 0, 5),
+   40, 17.00, 1, 0, 5),
 
   (1, 'Tratamiento para Acné',
    'Protocolo especializado con luz LED azul, ácido salicílico y mascarilla con árbol de té para controlar el acné activo, reducir la inflamación y prevenir nuevos brotes. Apto para pieles sensibles y adolescentes.',
-   55, NULL, 1, 0, 6);
+   55, 16.00, 1, 0, 6);
 
 
 -- ── Servicios Corporales ──────────────────────────────────────
@@ -284,27 +284,27 @@ INSERT INTO servicios
 VALUES
   (2, 'Masaje Relajante',
    'Masaje de cuerpo completo con aceites esenciales aromaterapéuticos de lavanda y rosa. Técnicas suaves de effleurage y petrissage para liberar el estrés acumulado y promover un estado de calma profunda.',
-   60, NULL, 1, 1, 1),
+   60, 18.00, 1, 1, 1),
 
   (2, 'Masaje Descontracturante',
    'Técnica de presión profunda enfocada en contracturas musculares y zonas de tensión crónica (cuello, espalda y hombros). Combina digitopresión y maniobras de fricción para liberar nudos musculares. Recomendado para personas activas y deportistas.',
-   75, NULL, 1, 0, 2),
+   75, 20.00, 1, 0, 2),
 
   (2, 'Masaje con Piedras Calientes',
-   'Terapia milenaria que combina el calor de las piedras de basalto volcánico con aceites esenciales. El calor penetra en los músculos mejorando la circulación sanguínea, aliviando el dolor articular y produciendo una relajación profunda incomparable.',
-   90, NULL, 1, 0, 3),
+   'Terapia milenaria que combina el calor de las piedras de basalto volcánico con aceites esenciales. El calor penetra en los músculos mejorando la circulación sanguínea, aliviando el dolor articular and produciendo una relajación profunda incomparable.',
+   90, 20.00, 1, 0, 3),
 
   (2, 'Exfoliación Corporal Premium',
    'Tratamiento de renovación celular con exfoliante de sal marina, azúcar de caña y aceite de argán. Elimina células muertas, suaviza y nutre la piel en profundidad. Finaliza con aplicación de mantequilla de karité para una hidratación duradera.',
-   45, NULL, 1, 0, 4),
+   45, 15.00, 1, 0, 4),
 
   (2, 'Envoltura Reductora',
    'Tratamiento corporal con barro de arcilla verde enriquecido con cafeína y algas marinas. Activa la circulación, reduce la apariencia de celulitis y ayuda a modelar la silueta. Se aplica con técnica de vendaje caliente para maximizar resultados.',
-   60, NULL, 1, 0, 5),
+   60, 17.00, 1, 0, 5),
 
   (2, 'Drenaje Linfático Manual',
    'Técnica especializada de presión rítmica y suave que estimula el sistema linfático para eliminar toxinas, reducir la retención de líquidos y aliviar la sensación de pesadez. Ideal en postoperatorio o para piernas cansadas y edemas. Certificación Vodder.',
-   60, NULL, 1, 0, 6);
+   60, 19.00, 1, 0, 6);
 
 
 -- ── Servicios de Cejas & Pestañas ─────────────────────────────
@@ -313,27 +313,27 @@ INSERT INTO servicios
 VALUES
   (3, 'Diseño de Cejas',
    'Diseño personalizado según la estructura facial de la clienta. Incluye depilación con hilo y cera, definición del arco y tinte para mayor expresividad.',
-   30, NULL, 1, 0, 1),
+   30, 8.00, 1, 0, 1),
 
   (3, 'Laminado de Cejas',
    'Técnica que alisa y fija los vellos de la ceja en la dirección deseada, creando un efecto de cejas más gruesas, uniformes y definidas durante 4 a 8 semanas.',
-   45, NULL, 1, 0, 2),
+   45, 12.00, 1, 0, 2),
 
   (3, 'Extensión de Pestañas Clásica',
    'Aplicación de extensiones sintéticas pelo a pelo para un look natural y elegante. Aumenta el volumen y la longitud de tus pestañas de forma cómoda y duradera (3 a 4 semanas).',
-   90, NULL, 1, 1, 3),
+   90, 20.00, 1, 1, 3),
 
   (3, 'Extensión de Pestañas Volumen',
    'Técnica fanmaker de 2D a 6D que crea un efecto dramático y lleno para quienes buscan mayor densidad. Las extensiones en abanico aportan un look espectacular de larga duración.',
-   120, NULL, 1, 0, 4),
+   120, 20.00, 1, 0, 4),
 
   (3, 'Lifting de Pestañas',
    'Permanente que riza y eleva la pestaña natural desde la raíz, dando la ilusión de pestañas más largas sin extensiones. Ideal para pieles sensibles. Duración de 6 a 8 semanas.',
-   60, NULL, 1, 0, 5),
+   60, 15.00, 1, 0, 5),
 
   (3, 'Tinte de Cejas y Pestañas',
    'Coloración semipermanente que intensifica el color de cejas y pestañas para una mirada más definida sin maquillaje. Dura entre 3 y 5 semanas según el tipo de cabello.',
-   30, NULL, 1, 0, 6);
+   30, 10.00, 1, 0, 6);
 
 
 -- ── Promociones ───────────────────────────────────────────────
