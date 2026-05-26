@@ -5,7 +5,6 @@ $base_dir = __DIR__;
 $lock_file = $base_dir . '/setup.lock';
 $config_file = $base_dir . '/config/db.php';
 $sql_schema = $base_dir . '/database/susyestetic.sql';
-$sql_admin = $base_dir . '/database/migration_admin.sql';
 
 $is_locked = file_exists($lock_file);
 
@@ -74,27 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $addLog("Esquema principal e información base importados exitosamente.");
             } else {
                 throw new Exception("No se encontró el archivo de esquema: {$sql_schema}");
-            }
-            
-            $addLog("Ejecutando migraciones de administrador...");
-            if (file_exists($sql_admin)) {
-                $sql = file_get_contents($sql_admin);
-                $sql = str_ireplace('USE susyestetic;', "USE `{$dbname}`;", $sql);
-                
-                try {
-                    $pdo->exec($sql);
-                    $addLog("Migraciones de administrador aplicadas (Soporte Admin y Usuarios creados).");
-                } catch (PDOException $e) {
-                    if (strpos($e->getMessage(), 'Duplicate column name') !== false) {
-                        $addLog("Migración admin omitida: Las columnas ya existen. Todo en orden.");
-                    } else if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
-                        $addLog("Migración admin: El usuario administrador ya existía. Todo en orden.");
-                    } else {
-                        throw $e;
-                    }
-                }
-            } else {
-                throw new Exception("No se encontró el archivo de migración: {$sql_admin}");
             }
             
             $addLog("Actualizando archivo de configuración (config/db.php)...");

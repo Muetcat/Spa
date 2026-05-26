@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS servicios (
   id_categoria    INT            UNSIGNED NOT NULL,
   nombre          VARCHAR(150)   NOT NULL COMMENT 'Nombre del tratamiento',
   descripcion     TEXT                    COMMENT 'Descripción detallada del servicio',
+  imagen_ruta     VARCHAR(255)   NULL     COMMENT 'Ruta de la imagen del servicio',
   duracion_min    SMALLINT       UNSIGNED NOT NULL DEFAULT 60 COMMENT 'Duración en minutos',
   precio          DECIMAL(8, 2)           COMMENT 'Precio base en dólares (NULL si es variable)',
   activo          TINYINT(1)     NOT NULL DEFAULT 1 COMMENT '1 = disponible, 0 = no disponible',
@@ -113,6 +114,7 @@ CREATE TABLE IF NOT EXISTS clientes (
   correo          VARCHAR(150)             COMMENT 'Correo electrónico de contacto',
   password        VARCHAR(255)             COMMENT 'Contraseña encriptada',
   notas_perfil    TEXT                     COMMENT 'Alergias, preferencias o condiciones especiales',
+  es_admin        TINYINT(1)     NOT NULL DEFAULT 0 COMMENT '1 = administrador, 0 = cliente normal',
   es_primera_visita TINYINT(1)  NOT NULL DEFAULT 1 COMMENT '1 = primera vez, 0 = clienta recurrente',
   fecha_registro  TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
   fecha_actualizacion TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -175,6 +177,11 @@ CREATE TABLE IF NOT EXISTS reservas (
                   )              NOT NULL DEFAULT 'pendiente',
   precio_cobrado  DECIMAL(8, 2)           COMMENT 'Precio real cobrado (puede diferir del base)',
   descuento_aplicado DECIMAL(8, 2) NOT NULL DEFAULT 0.00 COMMENT 'Monto de descuento aplicado',
+  metodo_pago     VARCHAR(50)    NOT NULL DEFAULT 'local',
+  estado_pago     VARCHAR(50)    NOT NULL DEFAULT 'pendiente',
+  paypal_order_id VARCHAR(100)   NULL,
+  paypal_capture_id VARCHAR(100) NULL,
+  monto_pagado    DECIMAL(8, 2)  NOT NULL DEFAULT 0.00,
   fecha_creacion  TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
   fecha_actualizacion TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id_reserva),
@@ -423,6 +430,18 @@ INSERT INTO configuracion_negocio (clave, valor, descripcion) VALUES
   ('horas_confirmacion',   '24',                              'Horas máximas para confirmar una reserva'),
   ('horas_cancelacion_minima', '4',                           'Horas mínimas de anticipación para cancelar sin penalidad'),
   ('año_fundacion',        '2018',                            'Año de apertura del negocio');
+
+
+-- ── Administrador por defecto ────────────────────────────────
+INSERT INTO clientes (nombre_completo, telefono, correo, password, es_admin, es_primera_visita)
+VALUES (
+  'Administrador SuSpa',
+  '+593 098-497-0418',
+  'admin@suspa.com',
+  '$2y$10$ZHJy1QajzJgRJSO2vxqhjeVSehu3CZmLK7SpHbafMCievMe3GBLiu',
+  1,
+  0
+);
 
 
 -- ============================================================
