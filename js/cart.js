@@ -169,10 +169,18 @@ function renderCartItems(cart) {
   const total      = cart.filter(i => i.price > 0).reduce((s, i) => s + i.price * i.qty, 0);
   const hasUnprice = cart.some(i => i.price === 0);
 
+  let formattedTotal = 'A consultar';
+  if (total > 0) {
+    formattedTotal = '$' + total.toFixed(2);
+    if (hasUnprice) {
+      formattedTotal += ' + consultar';
+    }
+  }
+
   if (footer) footer.innerHTML = `
     <div class="cart-total">
       <span>Total estimado</span>
-      <strong>${total > 0 ? '$' + total.toFixed(2) : ''}${hasUnprice ? ' + consultar' : ''}</strong>
+      <strong>${formattedTotal}</strong>
     </div>
     <a href="#" class="btn-primary" style="justify-content:center;width:100%;margin-top:1rem;" onclick="handleReservationClick(event)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">

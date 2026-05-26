@@ -144,6 +144,14 @@ function renderCartSummary() {
   const total      = cart.filter(i => i.price > 0).reduce((s, i) => s + i.price * i.qty, 0);
   const hasUnprice = cart.some(i => i.price === 0);
 
+  let formattedTotal = 'A consultar';
+  if (total > 0) {
+    formattedTotal = '$' + total.toFixed(2);
+    if (hasUnprice) {
+      formattedTotal += ' + consultar';
+    }
+  }
+
   summaryEl.innerHTML = cart.map(item => `
     <div class="cart-summary-item">
       <div class="cart-summary-item-left">
@@ -158,7 +166,7 @@ function renderCartSummary() {
     </div>`).join('') + `
     <div class="cart-summary-total">
       <span>Total estimado:</span>
-      <strong>${total > 0 ? '$' + total.toFixed(2) : ''}${hasUnprice ? ' + consultar' : ''}</strong>
+      <strong>${formattedTotal}</strong>
     </div>
     <button type="button" class="cart-summary-edit" onclick="window.history.back()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
